@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>3XB — Web signals for business underwriting</title>
+<meta name="description" content="3XB: alternative data and web entity signals for business underwriting by community lenders and CDFIs.">
+<style>
+:root{--bg:#0a0a0f;--card:#12121a;--line:#22222e;--fg:#e6e6ef;--mut:#8a8aa0;--cyan:#00e5ff;--pink:#ff2e88}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 system-ui,-apple-system,Segoe UI,sans-serif}
+a{color:var(--cyan)}.wrap{max-width:1000px;margin:0 auto;padding:0 20px}
+nav{display:flex;justify-content:space-between;align-items:center;padding:18px 0}nav b{font-size:22px;color:var(--cyan)}nav b span{color:var(--pink)}nav a{margin-left:18px;color:var(--mut);text-decoration:none}
+section{padding:56px 0;border-top:1px solid var(--line)}h1{font-size:44px;line-height:1.15;margin:30px 0 14px}h2{font-size:28px;margin:0 0 18px}
+.g{background:linear-gradient(90deg,var(--cyan),var(--pink));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{color:var(--mut);font-size:19px;max-width:720px}.btn{display:inline-block;padding:11px 20px;border-radius:8px;border:1px solid var(--cyan);color:var(--cyan);background:transparent;font-weight:600;cursor:pointer;text-decoration:none;font-size:15px}
+.btn.p{background:var(--cyan);color:#000}.btn.k{border-color:var(--pink);color:var(--pink)}.row{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px}
+.num{font-size:32px;font-weight:700;color:var(--cyan)}.lbl{color:var(--mut);font-size:14px}
+input{flex:1;min-width:200px;padding:11px 14px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--fg);font-size:15px}
+pre{background:#07070b;border:1px solid var(--line);border-radius:8px;padding:14px;overflow:auto;font-size:13px;color:#b8f6ff}
+.sig{display:inline-block;padding:3px 10px;border-radius:99px;font-weight:700;font-size:13px}.strong{background:#00e5ff22;color:var(--cyan)}.review{background:#ffd16622;color:#ffd166}.weak{background:#ff2e8822;color:var(--pink)}
+.price{font-size:36px;font-weight:700}.price small{font-size:15px;color:var(--mut)}.disc{color:var(--mut);font-size:14px}footer{padding:30px 0;color:var(--mut);font-size:14px;border-top:1px solid var(--line)}
+</style></head><body>
+<div class="wrap">
+<nav><b>3<span>X</span>B</b><div><a href="#try">Try it</a><a href="#how">How it works</a><a href="#pricing">Pricing</a><a href="https://3xb-api-production.up.railway.app/docs">Docs</a></div></nav>
+<header><h1>Alternative data and <span class="g">web signals</span> for business underwriting</h1>
+<p class="lead">3XB crawls the public web, extracts organizations, products, places and financial figures, and maps how they connect. Community lenders and CDFIs use it as an extra signal when evaluating businesses — your team always makes the final decision.</p>
+<div class="row"><a class="btn p" href="#try">Try the API</a><a class="btn" href="https://fitzyracing1.github.io/3xb-graph/">Explore the live graph</a><a class="btn k" href="https://3xb-api-production.up.railway.app/docs">API docs</a></div></header>
+</div>
+<section><div class="wrap"><h2>Live index</h2><p class="lbl" id="stat-status">Loading live numbers from the API…</p>
+<div class="grid"><div class="card"><div class="num" id="s-pages">—</div><div class="lbl">pages crawled</div></div>
+<div class="card"><div class="num" id="s-ent">—</div><div class="lbl">unique entities</div></div>
+<div class="card"><div class="num" id="s-edges">—</div><div class="lbl">relationship edges</div></div>
+<div class="card"><div class="num" id="s-org">—</div><div class="lbl">organizations</div></div></div></div></section>
+<section id="try"><div class="wrap"><h2>Try it: look up an organization</h2>
+<p class="lbl">Enter a business or organization name (e.g. Google, Microsoft). Organizations only — do not enter individuals.</p>
+<form id="f" class="row"><input id="q" value="Google" aria-label="Organization name"><button class="btn p">Get signal</button></form>
+<div id="out" style="margin-top:20px"></div></div></section>
+<section id="how"><div class="wrap"><h2>How it works</h2><div class="grid">
+<div class="card"><b style="color:var(--cyan)">1. Crawl</b><p class="lbl">Public web pages are crawled and stored continuously.</p></div>
+<div class="card"><b style="color:var(--cyan)">2. Extract</b><p class="lbl">Entities are tagged (Organization, Product, Location, FinancialFigure…) and weighted by frequency and recency.</p></div>
+<div class="card"><b style="color:var(--cyan)">3. Connect</b><p class="lbl">Co-occurrence builds a relationship graph — see it in the <a href="https://fitzyracing1.github.io/3xb-graph/">graph explorer</a>.</p></div>
+<div class="card"><b style="color:var(--cyan)">4. Signal</b><p class="lbl"><code>/entity/{name}/loan-score</code> blends an organization's own weight with its neighborhood into a composite web signal for your underwriting workflow.</p></div></div>
+<p class="lbl" style="margin-top:18px">Endpoints: <code>/stats</code> <code>/entities</code> <code>/entity/{name}</code> <code>/entity/{name}/loan-score</code> <code>/search?q=</code> <code>/tags</code> <code>/tag/{tag}</code> <code>/graph</code> <code>/export</code> (CSV) — full reference in the <a href="https://3xb-api-production.up.railway.app/docs">API docs</a>.</p></div></section>
+<section id="pricing"><div class="wrap"><h2>Pricing</h2><div class="grid">
+<div class="card"><b>Starter</b><div class="price">$500<small>/mo</small></div><p class="lbl">API access to entity lookups, search, tags, graph and business signals.</p><button class="btn p" data-plan="starter">Subscribe</button></div>
+<div class="card"><b>Growth</b><div class="price">$1,500<small>/mo</small></div><p class="lbl">For teams integrating web signals across their business-lending pipeline.</p><button class="btn k" data-plan="growth">Subscribe</button></div></div>
+<p class="lbl" id="co-msg"></p></div></section>
+<section id="disclaimer"><div class="wrap"><h2>Disclaimer</h2><p class="disc">3XB provides informational signals derived from public web data about organizations and businesses. 3XB is not a consumer reporting agency, and its output is not a consumer report under the Fair Credit Reporting Act (FCRA). It must not be used to determine the eligibility of individuals for credit, employment, insurance, or housing, or for any other FCRA-permissible purpose. Signals are one input among many; lenders are solely responsible for their own underwriting decisions.</p></div></section>
+<footer><div class="wrap">© 2026 3XB · <a href="https://github.com/fitzyracing1/3xb-site">GitHub</a> · <a href="mailto:Fitzyracing1@gmail.com">Fitzyracing1@gmail.com</a></div></footer>
+<script>
+const API="https://3xb-api-production.up.railway.app";
+const $=id=>document.getElementById(id),fmt=n=>Number(n).toLocaleString("en-US");
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+fetch(API+"/stats").then(r=>{if(!r.ok)throw r.status;return r.json()}).then(s=>{
+ $("s-pages").textContent=fmt(s.pages_crawled);$("s-ent").textContent=fmt(s.unique_entities);
+ $("s-edges").textContent=fmt(s.relationship_edges);$("s-org").textContent=fmt((s.entities_by_type||{}).Organization||0);
+ $("stat-status").textContent="Live from /stats";}).catch(()=>$("stat-status").textContent="Live stats unavailable right now.");
+// Client-side signal bucket from composite_score (relative web-presence signal, not a decision)
+function signal(c){return c>=0.5?"strong":c>=0.1?"review":"weak"}
+$("f").addEventListener("submit",async e=>{e.preventDefault();const n=$("q").value.trim();if(!n)return;
+ const out=$("out");out.innerHTML='<p class="lbl">Looking up…</p>';const u=encodeURIComponent(n);
+ try{const [ls,en]=await Promise.all([fetch(API+"/entity/"+u+"/loan-score"),fetch(API+"/entity/"+u)]);
+  if(ls.status===404||en.status===404){out.innerHTML='<div class="card">No entity named <b>'+esc(n)+'</b> found in the index. Try another organization.</div>';return}
+  if(!ls.ok||!en.ok)throw new Error("API error");
+  const s=await ls.json(),d=await en.json();
+  if(d.tag&&d.tag!=="Organization"&&d.tag!=="LegalEntity"){out.innerHTML='<div class="card"><b>'+esc(n)+'</b> is tagged <code>'+esc(d.tag)+'</code>. This demo shows signals for organizations/businesses only.</div>';return}
+  const sig=signal(s.composite_score);
+  const nb=(d.neighbors||[]).slice(0,8).map(x=>esc(x.entity)).join(", ");
+  out.innerHTML='<div class="card"><h3 style="margin-top:0">'+esc(d.name||n)+' <span class="lbl">'+esc(d.tag||"")+'</span></h3>'+
+  '<p>Signal: <span class="sig '+sig+'">'+sig+'</span></p>'+
+  '<div class="grid"><div><div class="num">'+s.composite_score+'</div><div class="lbl">composite signal</div></div><div><div class="num">'+s.own_weight+'</div><div class="lbl">own web weight</div></div><div><div class="num">'+s.neighbor_risk_avg+'</div><div class="lbl">neighbor avg</div></div><div><div class="num">'+fmt(d.frequency||0)+'</div><div class="lbl">mentions</div></div></div>'+
+  (nb?'<p class="lbl">Connected to: '+nb+'…</p>':'')+
+  '<p class="disc">Informational signal only. Not a consumer report; your team makes the final decision. Signal bucket is derived client-side (≥0.5 strong, ≥0.1 review, else weak).</p></div>';
+ }catch(err){out.innerHTML='<div class="card">Could not reach the API. Please try again.</div>'}});
+document.querySelectorAll("[data-plan]").forEach(b=>b.addEventListener("click",async()=>{
+ const m=$("co-msg");m.textContent="Starting checkout…";
+ try{const r=await fetch(API+"/checkout/"+b.dataset.plan,{method:"POST"});const j=await r.json();
+  if(r.ok&&j.url){location.href=j.url}else{m.textContent="Checkout unavailable ("+(j.detail||r.status)+"). Email Fitzyracing1@gmail.com."}}
+ catch(e){m.textContent="Checkout unavailable. Email Fitzyracing1@gmail.com."}}));
+</script></body></html>
